@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 //Reddit Daily Challenge #198 Words With Enemies
@@ -10,11 +9,11 @@ public class Word_Game {
 		
 		String firstWord;
 		String secondWord;
-		ArrayList<String> find = new ArrayList<String>();
 		Scanner words = new Scanner(System.in);
 		boolean play = true;
 		
-		while(play){
+		while(play)
+		{
 			System.out.println("Game Start");
 			System.out.println("Enter in two words, seperated by a space");
 			firstWord = words.next();
@@ -31,26 +30,19 @@ public class Word_Game {
 					{
 						if(firstWord.charAt(ii) == secondWord.charAt(jj))
 						{
-							find.add("" + firstWord.charAt(ii));
+							String temp = ""+firstWord.charAt(ii);
+							
+							firstWord = firstWord.replaceFirst(temp, "");
+							secondWord = secondWord.replaceFirst(temp, "");
+							
+							ii--;
+							break;
 						}
 					}
 				}
 				
-				//System.out.println("ArrayList Size: " + find.size());
-				
-					
-				for(int ii=0; ii<find.size(); ii++)
-				{
-					if(firstWord.contains(find.get(ii)) && secondWord.contains(find.get(ii)))
-					{
-						//System.out.println("found" + ", " + find.get(ii));
-						firstWord = firstWord.replaceFirst(find.get(ii), "");
-						secondWord = secondWord.replaceFirst(find.get(ii), "");
-					}
-				}
 				
 				System.out.println(firstWord + "," + secondWord);
-				//System.out.println(firstWord.length() + "," + secondWord.length());
 				
 				if(firstWord.length() > secondWord.length())
 				{
@@ -64,8 +56,16 @@ public class Word_Game {
 				{
 					System.out.println("Tie, Try Again, " + firstWord.length() + " to " + secondWord.length());
 				}
-			
-				find.clear();
+				
+				System.out.println("Continue playing? Y/N");
+				firstWord = words.next();
+				
+				if(firstWord.compareToIgnoreCase("N") == 0 || firstWord.compareToIgnoreCase("NO") == 0)
+				{
+					play = false;
+				}
+						
+				
 				firstWord = "";
 				secondWord = "";
 			}
@@ -74,6 +74,8 @@ public class Word_Game {
 				System.out.println("Two words have to be inputted!");
 			}
 		}
+		
+		System.out.println("Hope you had Fun :)");
 	}
 	
 }
